@@ -12,12 +12,21 @@ let elapsedTime;
 let stopTime;
 
 let highScores = [];
-
+let cook = document.cookie.match(/highscore=(\d+.\d+)/);
+highScores.push(cook[1]);
+console.log(cook);
 offTimeText.classList.toggle("hidden");
-
+if(highScores.length == 0){
+    highScoreText.classList.toggle("hidden");
+}
+else{
+    highScoreText.innerText = "Best: "+highScores[0];
+}
 document.addEventListener("keydown", (e) =>{
     if(e.code == "Space"){
         running = !running;
+        
+        
         if(running){
             startTimer();
             mainText.innerText = "Stop at exactly 5 seconds";
@@ -26,6 +35,7 @@ document.addEventListener("keydown", (e) =>{
             stopTime = Number(timeText.innerText);
             
             offTimeText.classList.remove("hidden");
+            highScoreText.classList.remove("hidden");
             mainText.innerText = "Press Space";
             let ot;
             if(goalTime > stopTime){
@@ -40,11 +50,11 @@ document.addEventListener("keydown", (e) =>{
                 ot = 0;
                 offTimeText.innerHTML = `${ot.toFixed(3)}`
             }
-            console.log(ot);
-            highScores.push(ot);
-            highScores.sort((a, b) => a-b);
-            highScoreText.innerText = "Best: "+highScores[0].toFixed(3);
             
+            highScores.push(ot.toFixed(3));
+            highScores.sort((a, b) => a-b);
+            highScoreText.innerText = "Best: "+highScores[0];
+            document.cookie="highscore="+highScores[0]+"; SameSite=None; Secure";
         }
     }
 });

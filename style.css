@@ -53,25 +53,23 @@
     text-shadow: 1px 1px 1px blue;
 }
 .hs-board{
-    border-style: solid;
-    border-radius: 2px;
+    
     padding: 10px;
     margin-top: 10px;
 }
 
 .hs-h3{
+    padding: 5px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 2px;
     font-weight: bold;
     text-decoration: underline;
 }
 
-.active{
-    color: red;
-    background-color: rgb(16, 124, 34);
-}
-
-.respond{
-    color: red;
-    background-color: rgb(0, 127, 4);
+.pointFive{
+    text-shadow: 1, 1, 1, rgb(0, 191, 255);
+    font-size: 20px;
 }
 
 .hidden{
