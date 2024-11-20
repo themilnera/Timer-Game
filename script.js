@@ -10,20 +10,30 @@ let goalDistance;
 let currentTime;
 let elapsedTime;
 let stopTime;
-
+let startTime;
 let highScores = [];
-let cook = document.cookie.match(/highscore=(\d+.\d+)/);
-if(cook != null || cook != undefined){
-    highScores.push(cook[1]);
+
+
+async function grabCookie(){
+    try{
+        let cook = await document.cookie.match(/highscore=(\d+.\d+)/);
+        if(cook != null || cook != undefined){
+            highScores.push(cook[1]);
+        }
+    }
+    catch(error){
+        console.log("failed");
+    }
+    offTimeText.classList.add("hidden");
+    if(highScores.length == 0){
+        highScoreText.classList.remove("hidden");
+    }
+    else{
+        highScoreText.innerText = "Best: "+highScores[0];
+    }
 }
-console.log(cook);
-offTimeText.classList.toggle("hidden");
-if(highScores.length == 0){
-    highScoreText.classList.toggle("hidden");
-}
-else{
-    highScoreText.innerText = "Best: "+highScores[0];
-}
+
+
 document.addEventListener("keydown", (e) =>{
     if(e.code == "Space"){
         running = !running;
@@ -62,7 +72,7 @@ document.addEventListener("keydown", (e) =>{
 });
 
 
-let startTime;
+
 
 function updateTimer(){
     if(running){
@@ -81,3 +91,5 @@ function startTimer(){
     startTime = performance.now();
     requestAnimationFrame(updateTimer)
 }
+
+grabCookie();
