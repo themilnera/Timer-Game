@@ -7,13 +7,15 @@ let offTime = undefined;
 
 let goalTime = 5.000;
 let goalDistance;
-let currenTime;
+let currentTime;
 let elapsedTime;
 let stopTime;
 
 let highScores = [];
 let cook = document.cookie.match(/highscore=(\d+.\d+)/);
-highScores.push(cook[1]);
+if(cook != null || cook != undefined){
+    highScores.push(cook[1]);
+}
 console.log(cook);
 offTimeText.classList.toggle("hidden");
 if(highScores.length == 0){
